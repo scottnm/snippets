@@ -42,8 +42,7 @@ find_delimiter(
 void
 fill_graph(
     node* node_table,
-    char* value_entry,
-    char* delimiter_entry
+    char* value_entry
     )
 {
     node* value_node = NODE_AT(*value_entry);
@@ -136,7 +135,7 @@ int main()
         assert(node->children == NULL);
         node->child_count = child_count;
         node->children = calloc(node->child_count, sizeof(*node->children));
-        fill_graph(node_table, value_entry, delimiter_entry);
+        fill_graph(node_table, value_entry);
         value_entry = delimiter_entry + 1;
     }
 
