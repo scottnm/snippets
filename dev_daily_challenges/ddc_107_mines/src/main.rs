@@ -57,15 +57,16 @@ fn solve_dfs(cave_map: &CaveMap, miner: Pos, exit: Pos) -> StringVec {
         let height = cave_map[0].len();
 
         for direction in &DIRECTIONS {
-            let next_pos = match direction {
-                Direction::Left if miner.x > 0 => Pos{x: miner.x - 1, y: miner.y },
-                Direction::Right if miner.x < width - 1 => Pos{x: miner.x + 1, y: miner.y },
-                Direction::Down if miner.y > 0 => Pos{x: miner.x, y: miner.y - 1 },
-                Direction::Up if miner.y < height - 1 => Pos{x: miner.x, y: miner.y + 1 },
-                _ => miner,
-            };
+            let mut next_pos = miner;
+            match direction {
+                Direction::Left if miner.x > 0 => next_pos.x -= 1,
+                Direction::Right if miner.x < width - 1 => next_pos.x += 1,
+                Direction::Down if miner.y > 0 => next_pos.y -= 1,
+                Direction::Up if miner.y < height - 1 => next_pos.y += 1,
+                _ => continue,
+            }
 
-            if next_pos != miner && cave_map[next_pos.x][next_pos.y] {
+            if cave_map[next_pos.x][next_pos.y] {
                 path.push(direction_string(*direction));
                 let solved = solve_dfs_helper(path, cave_map, next_pos, exit);
                 if solved {
