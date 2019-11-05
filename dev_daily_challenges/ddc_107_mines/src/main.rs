@@ -32,9 +32,9 @@ enum Direction {
 fn direction_string(d: Direction) -> ConstStr {
     match d {
         Direction::Left => "Left",
+        Direction::Up => "Up",
         Direction::Right => "Right",
         Direction::Down => "Down",
-        Direction::Up => "Up",
     }
 }
 
@@ -66,8 +66,8 @@ fn solve_dfs(cave_map: &CaveMap, miner: Pos, exit: Pos) -> StringVec {
             match direction {
                 Direction::Left if miner.x > 0 => next_pos.x -= 1,
                 Direction::Right if miner.x < width - 1 => next_pos.x += 1,
-                Direction::Down if miner.y > 0 => next_pos.y -= 1,
-                Direction::Up if miner.y < height - 1 => next_pos.y += 1,
+                Direction::Up if miner.y > 0 => next_pos.y -= 1,
+                Direction::Down if miner.y < height - 1 => next_pos.y += 1,
                 _ => continue,
             }
 
@@ -119,11 +119,59 @@ mod tests {
     fn test_straight_path() {
         assert_eq!(
             solve_dfs(
-                &BoolVec2D![[true, false], [true, false]],
-                Pos { x: 0, y: 0 },
-                Pos { x: 1, y: 0 }
+                &BoolVec2D![[false, false], [true, true]],
+                Pos { x: 1, y: 0 },
+                Pos { x: 1, y: 1 }
             ),
-            vec!["Right"]
+            vec!["Down"]
+        );
+    }
+
+    #[test]
+    fn test_2x2_simple() {
+        assert_eq!(
+            solve_dfs(
+                &BoolVec2D![[true, false], [true, true]],
+                Pos { x: 0, y: 0 },
+                Pos { x: 1, y: 1 }
+            ),
+            vec!["Right", "Down"]
+        );
+    }
+
+    #[test]
+    fn test_1x4_line() {
+        assert_eq!(
+            solve_dfs(
+                &BoolVec2D![[true], [true], [true], [true]],
+                Pos { x: 0, y: 0 },
+                Pos { x: 3, y: 0 }
+            ),
+            vec!["Right", "Right", "Right"]
+        );
+    }
+
+    #[test]
+    fn test_3x3_walk_around() {
+        assert_eq!(
+            solve_dfs(
+                &BoolVec2D![[true, true, true], [false, false, true], [true, true, true]],
+                Pos { x: 0, y: 0 },
+                Pos { x: 2, y: 0 }
+            ),
+            vec!["Down", "Down", "Right", "Right", "Up", "Up"]
+        );
+    }
+
+    #[test]
+    fn test_5x5_walk_around() {
+        assert_eq!(
+            solve_dfs(
+                &BoolVec2D![[true, true, false, false, false], [false, true, true, false, false], [false, false, true, true, false], [false, false, false, true, true], [false, false, false, false, true]],
+                Pos { x: 0, y: 0 },
+                Pos { x: 4, y: 4 }
+            ),
+            vec!["Down", "Right", "Down", "Right", "Down", "Right", "Down", "Right"]
         );
     }
 }
