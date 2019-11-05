@@ -73,12 +73,10 @@ fn solve_dfs(cave_map: &CaveMap, miner: Pos, exit: Pos) -> StringVec {
 
             if cave_map[next_pos.x][next_pos.y] {
                 path.push(direction_string(*direction));
-                let solved = solve_dfs_helper(path, cave_map, next_pos, exit);
-                if solved {
+                if solve_dfs_helper(path, cave_map, next_pos, exit) {
                     return true;
-                } else {
-                    path.pop();
                 }
+                path.pop();
             }
         }
 
