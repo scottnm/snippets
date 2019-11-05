@@ -167,7 +167,13 @@ mod tests {
     fn test_5x5_walk_around() {
         assert_eq!(
             solve_dfs(
-                &BoolVec2D![[true, true, false, false, false], [false, true, true, false, false], [false, false, true, true, false], [false, false, false, true, true], [false, false, false, false, true]],
+                &BoolVec2D![
+                    [true, true, false, false, false],
+                    [false, true, true, false, false],
+                    [false, false, true, true, false],
+                    [false, false, false, true, true],
+                    [false, false, false, false, true]
+                ],
                 Pos { x: 0, y: 0 },
                 Pos { x: 4, y: 4 }
             ),
