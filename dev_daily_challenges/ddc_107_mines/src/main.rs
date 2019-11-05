@@ -39,7 +39,12 @@ fn direction_string(d: Direction) -> ConstStr {
 }
 
 fn solve_dfs(cave_map: &CaveMap, miner: Pos, exit: Pos) -> StringVec {
-    fn solve_dfs_helper(path: &mut StringVec, cave_map: &mut CaveMap, miner: Pos, exit: Pos) -> bool {
+    fn solve_dfs_helper(
+        path: &mut StringVec,
+        cave_map: &mut CaveMap,
+        miner: Pos,
+        exit: Pos,
+    ) -> bool {
         const DIRECTIONS: [Direction; 4] = [
             Direction::Left,
             Direction::Up,
@@ -48,7 +53,7 @@ fn solve_dfs(cave_map: &CaveMap, miner: Pos, exit: Pos) -> StringVec {
         ];
 
         if miner == exit {
-            return true
+            return true;
         }
 
         cave_map[miner.x][miner.y] = false;
@@ -87,7 +92,11 @@ fn solve_dfs(cave_map: &CaveMap, miner: Pos, exit: Pos) -> StringVec {
 }
 
 fn main() {
-    let _ = solve_dfs(&BoolVec2D![[true, false], [false, false]], Pos{x: 0, y: 0}, Pos{x: 1, y: 1});
+    let _ = solve_dfs(
+        &BoolVec2D![[true, false], [false, false]],
+        Pos { x: 0, y: 0 },
+        Pos { x: 1, y: 1 },
+    );
 }
 
 #[cfg(test)]
@@ -97,14 +106,24 @@ mod tests {
     #[test]
     fn test_no_path() {
         assert_eq!(
-            solve_dfs(&BoolVec2D![[true, false], [false, false]], Pos{x: 0, y: 0}, Pos{x: 1, y: 1}),
-            vec!["";0]);
+            solve_dfs(
+                &BoolVec2D![[true, false], [false, false]],
+                Pos { x: 0, y: 0 },
+                Pos { x: 1, y: 1 }
+            ),
+            vec![""; 0]
+        );
     }
 
     #[test]
     fn test_straight_path() {
         assert_eq!(
-            solve_dfs(&BoolVec2D![[true, false], [true, false]], Pos{x: 0, y: 0}, Pos{x: 1, y: 0}),
-            vec!["Right"]);
+            solve_dfs(
+                &BoolVec2D![[true, false], [true, false]],
+                Pos { x: 0, y: 0 },
+                Pos { x: 1, y: 0 }
+            ),
+            vec!["Right"]
+        );
     }
 }
