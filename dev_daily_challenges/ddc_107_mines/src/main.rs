@@ -2,7 +2,7 @@
 macro_rules! BoolVec2D {
     ( $( $x:expr ),* ) => {
         {
-            let mut temp_vec: Vec<Vec<bool>> = Vec::new();
+            let mut temp_vec = Vec::new();
             $(
                 temp_vec.push($x.to_vec());
             )*
