@@ -20,14 +20,11 @@ macro_rules! BoolVec2D {
 type CaveMap = Vec<Vec<bool>>;
 
 fn solve_dfs(cave_map: &CaveMap, miner: Pos, exit: Pos) -> Vec<String> {
-    /*
     fn solve_dfs_helper(cave_map: &mut CaveMap, miner: Pos, exit: Pos) -> Vec<String> {
+        vec![]
     }
 
-    let cave_map_copy: CaveMap<W, H> = cave_map;
-    solve_dfs_helper(&mut cave_map_copy, miner, exit);
-    */
-    vec![]
+    solve_dfs_helper(&mut cave_map.clone(), miner, exit)
 }
 
 fn main() {
