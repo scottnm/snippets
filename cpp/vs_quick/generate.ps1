@@ -37,25 +37,5 @@ $files |
         ReplaceInFiles -FileSet $files -Old $_ -New (new-guid)
     }
 
-<#
-$files |
-    sls "\w{8}-\w{4}-\w{4}-\w{4}-\w{12}" |
-    %{ $_.Matches.Groups[0].Value } |
-    sort |
-    Get-Unique -AsString |
-
-$files |
-    sls "\w{8}-\w{4}-\w{4}-\w{4}-\w{12}" |
-    %{ $_.Matches.Groups[0].Value } |
-    sort |
-    Get-Unique -AsString |
-
-$files |
-    sls "\w{8}-\w{4}-\w{4}-\w{4}-\w{12}" |
-    %{ $_.Matches.Groups[0].Value } |
-    sort |
-    Get-Unique -AsString |
-    #>
-
 popd
 
