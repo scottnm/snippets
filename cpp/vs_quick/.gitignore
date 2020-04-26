@@ -1,4 +1,5 @@
 .vs
 *.user
+x64/
 Debug/
 Release/
