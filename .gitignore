@@ -2,3 +2,6 @@
 *.exe
 *.obj
 *.hi
+
+.vs
+*.user
