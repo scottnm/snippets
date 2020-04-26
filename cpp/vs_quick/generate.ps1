@@ -15,9 +15,21 @@ $files = dir "$Name.*"
 
 echo "Files: $files"
 
-# REPLACE GUIDS
+function ReplaceInFiles {
+    Param(
+        [string[]]$FileSet,
+        [string]$Old,
+        [string]$New
+        )
+
+    $FileSet | %{ (Get-Content $_).replace($Old, $New) | Set-Content $_ }
+}
 
 # REPLACE REFERENCES TO vs_quick with $Name
+ReplaceInFiles -FileSet $Files -Old "vs_quick" -New $Name
+ReplaceInFiles -FileSet $Files -Old "vsquick" -New $Name
+
+# REPLACE GUIDS
 
 <#
 $files |
